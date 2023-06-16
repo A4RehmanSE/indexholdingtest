@@ -1,8 +1,10 @@
 Question # 1: Write an Eloquent query to retrieve users with the first name "Adil" who are not associated with the list with list_id 55.
 
-Answer: User::innerJoin('user_list', 'users.user_id', 'user_list.user_id')
-	->where('First_Name', '=', 'Adil')]
-	->where('list_id', '!=', 55)->get();
+Answer: User::where('First_Name', 'Adil')
+            ->whereDoesntHave('lists', function ($query) {
+                $query->where('List_ID', 55);
+            })
+            ->get();
 
 
 Question # 2: Write a Github Command to fetch updated code from hotfix-20230101-production branch to your feature-user-type-mae83 Branch.
@@ -25,7 +27,7 @@ Answer: i used the followingcommand set.
 
 Question # 4: In Redis, which data structure is best suited for maintaining a collection of unique elements where fast insertion, deletion, and membership operations are required?
 
-Answer: Hashes
+Answer: Sets
 
 Question # 5: In Agile project management, what is the purpose of the "Definition of Done" (DoD)?
 
@@ -48,5 +50,5 @@ Answer: Mount lifecycle hook not invoked during server side rendring.
 
 Question # 9: What is the purpose of an event source in AWS Lambda?
 
-Answer: To provide input parameters to a Lambda function
+Answer: To trigger the execution of a Lambda function.
 

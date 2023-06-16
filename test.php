@@ -6,7 +6,7 @@
 
 function getUniqueElements(array $numbers): array
 {
-    return (array)array_unique($numbers);
+    return array_values(array_unique($numbers));
 }
 
 // getEvenNumbers(array $numbers): array:
@@ -15,15 +15,15 @@ function getUniqueElements(array $numbers): array
 
 function getEvenNumbers(array $numbers): array
 {
-    $temArray = [];
+    $evenNumbers = [];
 
     foreach ($numbers as $number) {
-        if ($number / 2 !== 0) {
-            $temArray[] = $number;
+        if ($number % 2 === 0) {
+            $evenNumbers[] = $number;
         }
     }
 
-    return (array)$temArray;
+    return $evenNumbers;
 }
 
 
@@ -33,7 +33,7 @@ function getEvenNumbers(array $numbers): array
 
 function getSum(array $numbers): int
 {
-    return (int)array_sum($numbers);
+    return array_sum($numbers);
 }
 
 // reverseArray(array $numbers): array:
@@ -42,25 +42,25 @@ function getSum(array $numbers): int
 
 function reverseArray(array $numbers): array
 {
-    return (array)rsort($number);
+    $reversedArray = array_reverse($numbers);
+    return $reversedArray;
 }
 
 // checkSorted(array $numbers): bool:
 // o Input: An array $numbers of integers.
 // o Output: Return true if the elements in the input array are in ascending order, and false otherwise.
 
+
 function checkSorted(array $numbers): bool
 {
-    $previousNumber = 0;
-    $sorted = false;
+    $previousNumber = null;
+
     foreach ($numbers as $number) {
-        if ($previousNumber < $number) {
-            $sorted = true;
-        } else {
-            $sorted = false;
+        if ($previousNumber !== null && $number < $previousNumber) {
+            return false;
         }
         $previousNumber = $number;
     }
 
-    return $sorted;
+    return true;
 }
